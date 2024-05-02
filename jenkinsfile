@@ -1,13 +1,18 @@
 pipeline {
     agent any
-
+    
     stages {
         stage('Checkout') {
             steps {
                 script {
-                    checkout([$class: 'GitSCM', branches: [[name: 'SamarMatoussi']], userRemoteConfigs: [[url: 'https://github.com/SamarMatoussi/test.git']]])
+                    // Define the GitHub URL with the PAT embedded
+                    def gitHubUrl = 'https://SamarMatoussi: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@github.com/SamarMatoussi/test.git'
+                    
+                    // Checkout the repository using the GitHub URL
+                    checkout([$class: 'GitSCM', branches: [[name: 'SamarMatoussi']], userRemoteConfigs: [[url: gitHubUrl]]])
                 }
             }
         }
+
     }
 }
